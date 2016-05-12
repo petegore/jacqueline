@@ -1,0 +1,9 @@
+---
+
+- name: dependencies > Packages
+  apt:
+    name:  "{{ item }}"
+    force: true
+    state: present
+  with_items:
+    - apt-transport-https

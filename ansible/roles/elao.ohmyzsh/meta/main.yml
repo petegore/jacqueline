@@ -1,0 +1,22 @@
+---
+
+dependencies: []
+
+galaxy_info:
+
+  author:              Elao
+  company:             Elao
+  description: >
+    An oh-my-zsh role for elao symfony standard vagrant box
+  license:             MIT
+  min_ansible_version: 1.9.0
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+    - name: Ubuntu
+      versions:
+        - trusty
+  categories:
+    - development
+    - web

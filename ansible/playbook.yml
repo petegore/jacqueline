@@ -1,0 +1,57 @@
+---
+
+- hosts: all
+  sudo: yes
+  roles:
+    - { role: elao.apt }
+    - { role: elao.curl }
+    - { role: elao.motd }
+    - { role: elao.vim }
+    - { role: elao.git }
+    - { role: elao.zsh }
+    - { role: elao.ohmyzsh }
+    - { role: elao.nginx }
+    - { role: elao.php }
+    - { role: elao.composer }
+    - { role: elao.nodejs }
+    - { role: elao.npm }
+    - { role: elao.mysql }
+    - { role: elao.ruby }
+    - { role: elao.mailcatcher }
+  tasks:
+    - name: nginx | Disable default conf
+      file: >
+        dest=/etc/nginx/sites-enabled/default
+        state=absent
+      notify:
+        - nginx restart
+      sudo: yes
+
+    - name: symfony | Set proper rights on Symfony root
+      file: >
+        path=/srv/jacqueline
+        state=directory
+        owner=vagrant
+      sudo: yes
+
+    - name: symfony | Set new cache dir
+      file: >
+        path=/srv/cache
+        state=directory
+      sudo: yes
+
+    - name: symfony | Set new log dir
+      file: >
+        path=/srv/logs
+        state=directory
+      sudo: yes
+
+    - name: symfony | Set proper ACLs
+      shell: >
+        setfacl -R -m u:www-data:rwX -m u:vagrant:rwX /srv/cache /srv/logs
+      sudo: yes
+
+    - name: symfony | Set proper default ACLs
+      shell: >
+        setfacl -dR -m u:www-data:rwx -m u:vagrant:rwx /srv/cache /srv/logs
+      sudo: yes

@@ -1,0 +1,22 @@
+---
+
+dependencies: []
+
+galaxy_info:
+
+  author:              Elao
+  company:             Elao
+  description: >
+    Setup your Message Of The Day for your linux boxes
+  license:             MIT
+  min_ansible_version: 1.9.0
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+    - name: Ubuntu
+      versions:
+        - trusty
+  categories:
+    - development
+    - web

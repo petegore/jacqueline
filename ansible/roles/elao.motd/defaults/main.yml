@@ -1,0 +1,5 @@
+---
+
+elao_motd_file:     /etc/motd
+elao_motd_template: ~
+elao_motd:          ~

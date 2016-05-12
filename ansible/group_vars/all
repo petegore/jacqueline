@@ -1,0 +1,75 @@
+server_user : vagrant
+
+########## APT ##########
+elao_apt_packages:
+  - name: make
+  - name: wget
+  - name: unzip
+  - name: htop
+  - name: rsync
+  - name: acl
+
+elao_apt_repositories:
+  - source: "deb http://packages.dotdeb.org {{ ansible_distribution_release }} all"
+    key:
+      url: http://www.dotdeb.org/dotdeb.gpg
+      id:  89DF5277
+  - source: "deb https://deb.nodesource.com/{{ node_version }} {{ ansible_distribution_release }} main"
+    key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      id:  68576280
+
+########## PHP ##########
+elao_php_sapis: ['cli', 'fpm']
+elao_php_extensions: ['json', 'intl', 'curl', 'mcrypt', 'mysqlnd']
+
+########## Nginx ##########
+elao_nginx_configs:
+    - file:             app.conf
+      template:         templates/nginx/symfony.conf.j2
+      config:
+        port:           80
+        server_name:    "jacqueline.dev"
+        domain:         "*"
+        root:           "/srv/jacqueline/web"
+        client_max_body_size: 8M
+
+########## Motd ##########
+elao_motd_template: "{{ playbook_dir ~ '/templates/motd.j2' }}"
+
+########## Oh My Zsh ##########
+elao_ohmyzsh_users:
+  - user:     root
+    template: templates/ohmyzsh/.zshrc.j2
+  - user:     vagrant
+    template: templates/ohmyzsh/.zshrc.j2
+
+########## PHP ##########
+elao_php_fpm_pools:
+  - file:     www.conf
+    template: fpm_pools/www_dev.conf.j2
+    config:
+      - listen:           127.0.0.1:9000
+      - listen.backlog:   128
+
+########## NODEJS ##########
+node_version: node_4.x
+
+elao_npm_packages:
+  - name:     gulp
+    version:  3
+    global:   true
+
+########## MySQL ##########
+elao_mysql_users:
+  - name:     vagrant
+    password: null
+    priv:     jacqueline.*:ALL,GRANT
+    state:    present
+
+elao_mysql_databases:
+  - name:     jacqueline
+    state:    present
+
+########## MailCatcher ##########
+elao_mailcatcher_config_template: config/dev.j2

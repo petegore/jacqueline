@@ -1,0 +1,12 @@
+/.vagrant
+/web/bundles/
+/app/config/parameters.yml
+/var/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+/vendor/
+/bin/*
+!bin/console
+!bin/symfony_requirements
+/composer.phar
+/node_modules/

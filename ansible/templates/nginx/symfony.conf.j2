@@ -1,0 +1,38 @@
+{% set config = item.config|default([]) -%}
+
+server {
+    listen {{ config.domain|default(config.server_name) }}:{{ config.port|default(80) }};
+
+    server_name {{ config.server_name|default('$hostname') }};
+    root {{ config.root }};
+
+    client_max_body_size {{ config.client_max_body_size | default('1m') }};
+
+    error_log {{ config.error_log | default('/var/log/nginx/error.log') }};
+    access_log {{ config.access_log | default('/var/log/nginx/access.log') }};
+
+
+    # strip app.php/ prefix if it is present
+    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+
+    location / {
+        index app.php;
+        try_files $uri @rewrite;
+        sendfile off;
+    }
+
+    location @rewrite {
+        rewrite ^(.*)$ /app.php/$1 last;
+    }
+
+    # pass the PHP scripts to FastCGI server from upstream phpfcgi
+    location ~ ^/(app|app_dev)\.php(/|$) {
+        include fastcgi_params;
+
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #fastcgi_param VAGRANT 1;
+        # fastcgi_param PHP_VALUE "error_log=\"/var/log/php/api.log\"";
+    }
+}

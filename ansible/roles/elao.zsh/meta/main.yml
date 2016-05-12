@@ -1,0 +1,22 @@
+---
+
+dependencies: []
+
+galaxy_info:
+
+  author:              Elao
+  company:             Elao
+  description: >
+    This role will assume the following configuration:
+      - Install zsh package
+  license:             MIT
+  min_ansible_version: 1.7.2
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+    - name: Ubuntu
+      versions:
+        - trusty
+  categories:
+    - system

@@ -1,0 +1,132 @@
+---
+
+# Repositories
+elao_apt_repositories: []
+elao_apt_repositories_patterns:
+  backports:
+    source: deb http://cdn.debian.net/debian {{ ansible_distribution_release }}-backports main
+    pin:    release a={{ ansible_distribution_release }}-backports
+  dotdeb:
+    source: deb http://packages.dotdeb.org {{ ansible_distribution_release }} all
+    key:
+      url: http://www.dotdeb.org/dotdeb.gpg
+      id:  89DF5277
+  dotdeb_php55:
+    source: deb http://packages.dotdeb.org {{ ansible_distribution_release }}-php55 all
+  dotdeb_php56:
+    source: deb http://packages.dotdeb.org {{ ansible_distribution_release }}-php56 all
+  nginx:
+    source: deb http://nginx.org/packages/debian/ {{ ansible_distribution_release }} nginx
+    key:
+      url: http://nginx.org/keys/nginx_signing.key
+      id:  7BD9BF62
+  bearstech:
+    source: deb http://deb.bearstech.com/debian {{ ansible_distribution_release }}-bearstech main
+    key:
+      url: http://deb.bearstech.com/bearstech-archive.gpg
+      id:  90158EE0
+  nodesource_0_10:
+    source: deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main
+    key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      id:  68576280
+  nodesource_0_12:
+    source: deb https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
+    key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      id:  68576280
+  nodesource_4:
+    source: deb https://deb.nodesource.com/node_4.x {{ ansible_distribution_release }} main
+    key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      id:  68576280
+  postgresql:
+    source: deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main
+    key:
+      url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+      id:  ACCC4CF8
+  mongodb_3_0:
+    source: deb http://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/3.0 main
+    key:
+      url: http://docs.mongodb.org/10gen-gpg-key.asc
+      id:  7F0CEB10
+  varnish_4_0:
+    source: deb https://repo.varnish-cache.org/debian/ {{ ansible_distribution_release }} varnish-4.0
+    key:
+      url: https://repo.varnish-cache.org/debian/GPG-key.txt
+      id:  C4DEFFEB
+  jenkins:
+    source: deb http://pkg.jenkins-ci.org/debian binary/
+    key:
+      url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+      id:  D50582E6
+  sensu:
+    source: deb http://repos.sensuapp.org/apt sensu main
+    key:
+      url: http://repos.sensuapp.org/apt/pubkey.gpg
+      id:  7580C77F
+  rabbitmq:
+    source: deb http://www.rabbitmq.com/debian/ testing main
+    key:
+      url: http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+      id:  056E8E56
+  proxmox_enterprise:
+    source: deb https://enterprise.proxmox.com/debian {{ ansible_distribution_release }} pve-enterprise
+  logentries:
+    source: deb http://rep.logentries.com/ {{ ansible_distribution_release }} main
+    key:
+      url: https://pgp.mit.edu/pks/lookup?op=get&search=0xA5270289C43C79AD
+      id:  C43C79AD
+  galera:
+    source: deb http://releases.galeracluster.com/debian {{ ansible_distribution_release }} main
+    key:
+      url: http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xD669017EBC19DDBA
+      id:  BC19DDBA
+  grafana:
+    source: deb https://packagecloud.io/grafana/stable/debian/ {{ ansible_distribution_release }} main
+    key:
+      url: https://packagecloud.io/gpg.key
+      id:  D59097AB
+  elasticsearch:
+    source: deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main
+    key:
+      url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+      id:  D88E42B4
+  mongodb:
+    source: deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
+    key:
+      url: http://docs.mongodb.org/10gen-gpg-key.asc
+      id:  7F0CEB10
+  ppa_ansible:
+    source: ppa:ansible/ansible
+
+# Preferences
+elao_apt_preferences_dir:      /etc/apt/preferences.d
+elao_apt_preferences_template: preferences/empty.j2
+elao_apt_preferences:          []
+elao_apt_preferences_patterns:
+  vim:           vim*
+  git:           git*
+  php:           php*
+  mysql:         mysql*
+  nginx:         nginx*
+  ruby:          ruby*
+  nodejs:        nodejs*
+  rabbitmq:      rabbitmq*
+  redis:         redis*
+  logentries:    logentries*
+  sensu:         sensu*
+  haproxy:       haproxy*
+  galera:        galera*
+  grafana:       grafana*
+  elasticsearch: elasticsearch*
+  postgresql:    postgresql*
+  mongodb:       mongodb*
+  keepalived:    keepalived*
+
+# Packages
+elao_apt_packages: []
+
+# Update / Upgrade
+elao_apt_update:  false
+elao_apt_upgrade: false

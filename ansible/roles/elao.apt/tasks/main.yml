@@ -1,0 +1,10 @@
+---
+
+- include: dependencies.yml
+- include: repositories.yml
+- include: preferences.yml
+- include: update.yml
+  when: elao_apt_update or elao_apt_upgrade
+- include: upgrade.yml
+  when: elao_apt_upgrade
+- include: packages.yml

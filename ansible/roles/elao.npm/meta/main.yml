@@ -1,0 +1,19 @@
+---
+
+dependencies: []
+
+galaxy_info:
+
+  author:              Elao
+  company:             Elao
+  description: >
+    Setup and configure npm.
+  license: MIT
+  min_ansible_version: 1.8
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+  categories:
+    - development
+    - web
