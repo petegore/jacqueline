@@ -1,13 +1,14 @@
 sf=bin/console
 tmpdir=symfony_tmp_clone
 
-init-project: install-symfony install-hook-precommit vendor-install db-reset build-assets
+init-project: install-symfony vendor-install db-reset build-assets
 
-all: install-hook-precommit vendor-install db-restore build-assets
+all: vendor-install db-restore build-assets
 
 install-symfony:
 	@git clone git@github.com:symfony/symfony-standard.git $(tmpdir)
 	@cp -rn $(tmpdir)/app/* app/
+	@mkdir bin src tests var web
 	@cp -rn $(tmpdir)/bin/* bin/
 	@cp -rn $(tmpdir)/src/* src/
 	@cp -rn $(tmpdir)/tests/* tests/
@@ -35,9 +36,6 @@ db-fixtures:
 build-assets:
 	@rm -r web/assets/ || true
 	@gulp --dev
-
-install-hook-precommit:
-	@ln -s -f "../../bin/pre-commit" ".git/hooks/pre-commit"
 
 #########################################################
 #						TESTS							#
