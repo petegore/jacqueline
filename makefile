@@ -7,7 +7,7 @@ all: install-hook-precommit vendor-install db-restore build-assets
 
 install-symfony:
 	@git clone git@github.com:symfony/symfony-standard.git $(tmpdir)
-	@mv $(tmpdir)/app .
+	@cp -rn $(tmpdir)/app/* app/
 	@mv $(tmpdir)/bin .
 	@mv $(tmpdir)/src .
 	@mv $(tmpdir)/tests .
